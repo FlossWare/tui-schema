@@ -1,0 +1,24 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "example-dialog",
+  "title": "Configuration Dialog",
+  "theme": { "name": "default" },
+  "windows": [
+    {
+      "id": "config-dialog",
+      "kind": "dialog",
+      "title": "Configure",
+      "modal": true,
+      "defaultAction": "save",
+      "cancelAction": "cancel",
+      "initialFocus": "profile-name",
+      "layout": { "x": 20, "y": 5, "width": 40, "height": 12, "anchor": "center" },
+      "content": [
+        { "id": "profile-name", "type": "text-input", "label": "Profile", "value": "default" },
+        { "id": "enabled", "type": "checkbox", "label": "Enabled", "value": true },
+        { "id": "save", "type": "button", "label": "Save", "action": "save", "accelerator": "s" },
+        { "id": "cancel", "type": "button", "label": "Cancel", "action": "cancel", "accelerator": "c" }
+      ]
+    }
+  ]
+}
