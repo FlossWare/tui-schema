@@ -1,0 +1,42 @@
+{
+  "schema": "flossware.tui/v1",
+  "id": "example-menu",
+  "title": "Example Menu",
+  "menus": [
+    {
+      "id": "config",
+      "label": "Config",
+      "items": [
+        {
+          "id": "profiles",
+          "label": "Profiles",
+          "accelerator": "p",
+          "action": "profiles"
+        },
+        {
+          "id": "quit",
+          "label": "Quit",
+          "accelerator": "q",
+          "action": "quit"
+        }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "id": "main",
+      "kind": "window",
+      "title": "Example",
+      "movable": true,
+      "resizable": true,
+      "content": [
+        {
+          "id": "status",
+          "type": "label",
+          "label": "Ready",
+          "focusable": false
+        }
+      ]
+    }
+  ]
+}
