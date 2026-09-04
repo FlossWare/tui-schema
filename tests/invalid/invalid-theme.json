@@ -1,0 +1,9 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "invalid-theme",
+  "title": "Invalid Theme",
+  "theme": { "name": "default", "colors": { "window": "#ffffff" } },
+  "windows": [
+    { "id": "main", "kind": "window", "content": [] }
+  ]
+}
