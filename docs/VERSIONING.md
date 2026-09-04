@@ -4,21 +4,21 @@
 
 ## Version identifier
 
-Every document declares a schema identifier:
+Every document declares a schema identifier using `major.minor` form:
 
 ```json
 {
-  "schema": "flossware.tui/v1"
+  "schema": "flossware.tui/1.0"
 }
 ```
 
-The schema file is stored as `schema/tui-v1.schema.json`.
+The schema file is stored as `schema/tui-1.0.schema.json`.
 
 ## Compatibility rules
 
-- Patch-level clarifications that do not change validation semantics may be documented without creating a new major schema version.
-- Backward-compatible additions should use a minor schema version when they require consumers to opt into new fields or behavior.
-- Breaking changes require a new major schema version.
+- Patch-level clarifications that do not change validation semantics may be documented without creating a new schema release.
+- Backward-compatible additions should increment the minor version when they require consumers to understand new fields or behavior.
+- Breaking changes require a new major version.
 - Consumers must explicitly declare which schema versions they support.
 - Implementations must not silently reinterpret an unsupported schema version.
 
@@ -30,4 +30,4 @@ Actions are semantic identifiers. The application that consumes a document owns 
 
 ## Implementations
 
-A language implementation may have its own release cycle. For example, a Python TUI library can release independently from `tui-schema` while supporting `flossware.tui/v1`.
+A language implementation may have its own release cycle. For example, a Python TUI library can release independently from `tui-schema` while supporting `flossware.tui/1.0`.
