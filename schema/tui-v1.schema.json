@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FlossWare/tui-schema/blob/main/schema/tui-v1.schema.json",
+  "title": "FlossWare TUI Schema v1",
+  "description": "Language-neutral declarative schema for describing terminal user interfaces. Implementations interpret this contract; the schema contains no executable behavior.",
+  "type": "object",
+  "required": ["schema", "id", "title", "windows"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "flossware.tui/v1" },
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "theme": { "$ref": "#/$defs/theme" },
+    "menus": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/menu" },
+      "uniqueItems": true
+    },
+    "windows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/window" },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "accelerator": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]$"
+    },
+    "action": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]*$"
+    },
+    "menu": {
+      "type": "object",
+      "required": ["id", "label", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]*$" },
+        "label": { "type": "string", "minLength": 1 },
+        "accelerator": { "$ref": "#/$defs/accelerator" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/menuItem" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "menuItem": {
+      "type": "object",
+      "required": ["id", "label", "action"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]*$" },
+        "label": { "type": "string", "minLength": 1 },
+        "accelerator": { "$ref": "#/$defs/accelerator" },
+        "action": { "$ref": "#/$defs/action" },
+        "enabled": { "type": "boolean", "default": true },
+        "visible": { "type": "boolean", "default": true }
+      }
+    },
+    "window": {
+      "type": "object",
+      "required": ["id", "kind", "content"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]*$" },
+        "kind": { "enum": ["window", "dialog", "popup", "panel"] },
+        "title": { "type": "string" },
+        "modal": { "type": "boolean", "default": false },
+        "movable": { "type": "boolean", "default": true },
+        "resizable": { "type": "boolean", "default": true },
+        "layout": { "$ref": "#/$defs/layout" },
+        "content": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/widget" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "minWidth": { "type": "integer", "minimum": 1 },
+        "minHeight": { "type": "integer", "minimum": 1 },
+        "maxWidth": { "type": "integer", "minimum": 1 },
+        "maxHeight": { "type": "integer", "minimum": 1 },
+        "anchor": { "enum": ["top-left", "top-right", "bottom-left", "bottom-right", "center"] }
+      }
+    },
+    "widget": {
+      "type": "object",
+      "required": ["id", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]*$" },
+        "type": {
+          "enum": [
+            "label", "text", "text-input", "checkbox", "list", "menu",
+            "button", "separator", "group"
+          ]
+        },
+        "label": { "type": "string" },
+        "value": {},
+        "action": { "$ref": "#/$defs/action" },
+        "accelerator": { "$ref": "#/$defs/accelerator" },
+        "enabled": { "type": "boolean", "default": true },
+        "visible": { "type": "boolean", "default": true },
+        "focusable": { "type": "boolean", "default": true },
+        "items": { "type": "array", "items": {}, "uniqueItems": true },
+        "layout": { "$ref": "#/$defs/layout" }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "colors": { "type": "object", "additionalProperties": { "type": "string" } },
+        "attributes": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}
