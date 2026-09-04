@@ -1,0 +1,27 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "example-list",
+  "title": "Profile Selection",
+  "windows": [
+    {
+      "id": "profiles",
+      "kind": "popup",
+      "title": "Profiles",
+      "initialFocus": "profile-list",
+      "content": [
+        {
+          "id": "profile-list",
+          "type": "list",
+          "label": "Available profiles",
+          "selected": "default",
+          "action": "select-profile",
+          "items": [
+            { "id": "default", "label": "Default", "value": "default" },
+            { "id": "production", "label": "Production", "value": "production" },
+            { "id": "development", "label": "Development", "value": "development" }
+          ]
+        }
+      ]
+    }
+  ]
+}
