@@ -1,5 +1,5 @@
 {
-  "schema": "flossware.tui/v1",
+  "schema": "flossware.tui/1.0",
   "id": "example-menu",
   "title": "Example Menu",
   "menus": [
