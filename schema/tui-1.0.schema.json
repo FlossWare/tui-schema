@@ -66,25 +66,30 @@
     ] },
     "widgetCommon": {
       "type": "object", "required": ["id", "type"], "properties": {
-        "id": { "$ref": "#/$defs/identifier" }, "type": {}, "label": { "type": "string" },
-        "action": { "$ref": "#/$defs/action" }, "accelerator": { "$ref": "#/$defs/accelerator" },
+        "id": { "$ref": "#/$defs/identifier" }, "type": {},
         "enabled": { "type": "boolean", "default": true }, "visible": { "type": "boolean", "default": true },
-        "focusable": { "type": "boolean", "default": false }, "layout": { "$ref": "#/$defs/layout" }
+        "layout": { "$ref": "#/$defs/layout" }
       }
     },
     "label": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
-      { "properties": { "type": { "const": "label" }, "focusable": { "const": false } } },
+      { "required": ["label"], "properties": { "type": { "const": "label" }, "label": { "type": "string", "minLength": 1 }, "focusable": { "const": false } } },
       { "unevaluatedProperties": false }
     ] },
     "textInput": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
-      { "properties": { "type": { "const": "text-input" }, "value": { "type": "string", "default": "" }, "focusable": { "type": "boolean", "default": true } } },
+      { "required": ["value"], "properties": {
+        "type": { "const": "text-input" }, "label": { "type": "string" }, "value": { "type": "string" },
+        "action": { "$ref": "#/$defs/action" }, "focusable": { "type": "boolean", "default": true }
+      } },
       { "unevaluatedProperties": false }
     ] },
     "checkbox": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
-      { "properties": { "type": { "const": "checkbox" }, "value": { "type": "boolean", "default": false }, "focusable": { "type": "boolean", "default": true } } },
+      { "properties": {
+        "type": { "const": "checkbox" }, "label": { "type": "string" }, "value": { "type": "boolean", "default": false },
+        "action": { "$ref": "#/$defs/action" }, "accelerator": { "$ref": "#/$defs/accelerator" }, "focusable": { "type": "boolean", "default": true }
+      } },
       { "unevaluatedProperties": false }
     ] },
     "listItem": {
@@ -94,24 +99,29 @@
     "list": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
       { "required": ["items"], "properties": {
-        "type": { "const": "list" }, "items": { "type": "array", "items": { "$ref": "#/$defs/listItem" }, "minItems": 1 },
-        "selected": { "$ref": "#/$defs/identifier" }, "focusable": { "type": "boolean", "default": true }
+        "type": { "const": "list" }, "label": { "type": "string" }, "items": { "type": "array", "items": { "$ref": "#/$defs/listItem" }, "minItems": 1 },
+        "selected": { "$ref": "#/$defs/identifier" }, "action": { "$ref": "#/$defs/action" }, "focusable": { "type": "boolean", "default": true }
       } },
       { "unevaluatedProperties": false }
     ] },
     "button": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
-      { "required": ["action"], "properties": { "type": { "const": "button" }, "focusable": { "type": "boolean", "default": true } } },
+      { "required": ["label", "action"], "properties": {
+        "type": { "const": "button" }, "label": { "type": "string", "minLength": 1 }, "action": { "$ref": "#/$defs/action" },
+        "accelerator": { "$ref": "#/$defs/accelerator" }, "focusable": { "type": "boolean", "default": true }
+      } },
       { "unevaluatedProperties": false }
     ] },
     "separatorWidget": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
-      { "properties": { "type": { "const": "separator" }, "focusable": { "const": false } } },
+      { "properties": { "type": { "const": "separator" } } },
       { "unevaluatedProperties": false }
     ] },
     "group": { "allOf": [
       { "$ref": "#/$defs/widgetCommon" },
-      { "required": ["children"], "properties": { "type": { "const": "group" }, "children": { "type": "array", "items": { "$ref": "#/$defs/widget" }, "minItems": 1 }, "focusable": { "const": false } } },
+      { "required": ["children"], "properties": {
+        "type": { "const": "group" }, "label": { "type": "string" }, "children": { "type": "array", "items": { "$ref": "#/$defs/widget" }, "minItems": 1 }
+      } },
       { "unevaluatedProperties": false }
     ] },
     "theme": { "type": "object", "required": ["name"], "additionalProperties": false, "properties": { "name": { "type": "string", "minLength": 1 } } }
