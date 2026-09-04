@@ -1,0 +1,14 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "invalid-widget",
+  "title": "Invalid Widget",
+  "windows": [
+    {
+      "id": "main",
+      "kind": "window",
+      "content": [
+        { "id": "bad", "type": "label", "label": "Bad", "value": "not allowed" }
+      ]
+    }
+  ]
+}

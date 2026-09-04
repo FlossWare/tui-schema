@@ -1,0 +1,24 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "example-group",
+  "title": "Grouped Controls",
+  "theme": { "name": "default" },
+  "windows": [
+    {
+      "id": "settings",
+      "kind": "window",
+      "title": "Settings",
+      "content": [
+        {
+          "id": "options",
+          "type": "group",
+          "label": "Options",
+          "children": [
+            { "id": "verbose", "type": "checkbox", "label": "Verbose", "value": false },
+            { "id": "apply", "type": "button", "label": "Apply", "action": "apply" }
+          ]
+        }
+      ]
+    }
+  ]
+}

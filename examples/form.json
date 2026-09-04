@@ -1,0 +1,18 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "example-form",
+  "title": "Profile Form",
+  "theme": { "name": "default" },
+  "windows": [
+    {
+      "id": "form",
+      "kind": "panel",
+      "title": "Profile",
+      "content": [
+        { "id": "name", "type": "text-input", "label": "Name", "value": "example" },
+        { "id": "enabled", "type": "checkbox", "label": "Enabled", "value": true },
+        { "id": "submit", "type": "button", "label": "Apply", "action": "apply" }
+      ]
+    }
+  ]
+}

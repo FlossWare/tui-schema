@@ -2,23 +2,15 @@
   "schema": "flossware.tui/1.0",
   "id": "example-menu",
   "title": "Example Menu",
+  "theme": { "name": "default" },
   "menus": [
     {
-      "id": "config",
-      "label": "Config",
+      "id": "main-menu",
+      "label": "Main",
       "items": [
-        {
-          "id": "profiles",
-          "label": "Profiles",
-          "accelerator": "p",
-          "action": "profiles"
-        },
-        {
-          "id": "quit",
-          "label": "Quit",
-          "accelerator": "q",
-          "action": "quit"
-        }
+        { "id": "profiles", "label": "Profiles", "accelerator": "p", "action": "profiles" },
+        { "id": "menu-separator", "type": "separator" },
+        { "id": "quit", "label": "Quit", "accelerator": "q", "action": "quit" }
       ]
     }
   ],
@@ -27,15 +19,12 @@
       "id": "main",
       "kind": "window",
       "title": "Example",
-      "movable": true,
-      "resizable": true,
+      "menuBar": "main-menu",
+      "layout": { "x": 0, "y": 0, "width": 80, "height": 24 },
+      "initialFocus": "configure",
       "content": [
-        {
-          "id": "status",
-          "type": "label",
-          "label": "Ready",
-          "focusable": false
-        }
+        { "id": "status", "type": "label", "label": "Ready" },
+        { "id": "configure", "type": "button", "label": "Configure", "accelerator": "c", "action": "configure" }
       ]
     }
   ]

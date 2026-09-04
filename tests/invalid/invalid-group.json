@@ -1,0 +1,14 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "invalid-group",
+  "title": "Invalid Group",
+  "windows": [
+    {
+      "id": "main",
+      "kind": "window",
+      "content": [
+        { "id": "controls", "type": "group" }
+      ]
+    }
+  ]
+}
