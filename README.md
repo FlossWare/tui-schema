@@ -14,9 +14,9 @@ Implementations interpret the same declarative document in their native language
 
 The schema uses JSON Schema Draft 2020-12 and is versioned independently from implementation libraries.
 
-## Version 1
+## Version 1.0
 
-The v1 contract describes menus, semantic actions, keyboard accelerators, windows/dialogs/popups/panels, movable/resizable behavior, layout and geometry constraints, common widgets, focus/visibility/enabled state, and themes.
+The 1.0 contract describes menus, semantic actions, keyboard accelerators, windows/dialogs/popups/panels, movable/resizable behavior, layout and geometry constraints, common widgets, focus/visibility/enabled state, and themes.
 
 Application actions remain application-owned. For example, `"action": "profiles"` identifies an event; it does not embed executable code in the schema.
 
@@ -24,7 +24,7 @@ Application actions remain application-owned. For example, `"action": "profiles"
 
 ```text
 schema/
-  tui-v1.schema.json
+  tui-1.0.schema.json
 examples/
   menu.json
 docs/
