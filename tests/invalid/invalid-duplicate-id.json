@@ -1,0 +1,15 @@
+{
+  "schema": "flossware.tui/1.0",
+  "id": "duplicate-id",
+  "title": "Duplicate ID",
+  "windows": [
+    {
+      "id": "main",
+      "kind": "window",
+      "content": [
+        { "id": "status", "type": "label", "label": "One" },
+        { "id": "status", "type": "button", "label": "Two", "action": "two" }
+      ]
+    }
+  ]
+}
