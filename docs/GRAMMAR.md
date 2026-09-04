@@ -93,7 +93,7 @@ Absolute geometry is intentional for 1.0. Relative/fill sizing, padding, and ric
 
 A 1.0 theme contains only a `name`. The name is a portable semantic reference to a theme registered by the implementation. Color encodings, curses color-pair numbers, RGB values, and attribute constants do not cross the language boundary.
 
-This avoids creating two incompatible theme languages while allowing `curses-themes` and a future Java implementation to map the same semantic theme name to their native rendering systems.
+This avoids creating two incompatible theme languages while allowing `curses-tui` and a future Java implementation to map the same semantic theme name to their native rendering systems.
 
 ## Identity and references
 
