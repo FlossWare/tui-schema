@@ -26,7 +26,7 @@ def iter_widgets(widgets: list[dict[str, Any]]):
             yield from iter_widgets(widget.get("children", []))
 
 
-def collect_ids(document: dict[str, Any]) -> set[str]:
+def collect_ids(document: dict[str, Any]) -> list[str]:
     ids: list[str] = [document["id"]]
     for menu in document.get("menus", []):
         ids.append(menu["id"])
@@ -48,18 +48,17 @@ def check_semantics(document: dict[str, Any], path: Path) -> list[str]:
         errors.append(f"duplicate id in {path}")
 
     menu_ids = {menu["id"] for menu in document.get("menus", [])}
-    action_ids = set()
     for menu in document.get("menus", []):
         accelerators: set[str] = set()
         for item in menu["items"]:
             if item.get("type") == "separator":
                 continue
-            action_ids.add(item["action"])
             accelerator = item.get("accelerator")
             if accelerator and item.get("visible", True) and item.get("enabled", True):
-                if accelerator.lower() in {a.lower() for a in accelerators}:
+                normalized = accelerator.lower()
+                if normalized in accelerators:
                     errors.append(f"duplicate menu accelerator in {path}: {accelerator}")
-                accelerators.add(accelerator)
+                accelerators.add(normalized)
 
     for window in document["windows"]:
         if "menuBar" in window and window["menuBar"] not in menu_ids:
@@ -72,8 +71,6 @@ def check_semantics(document: dict[str, Any], path: Path) -> list[str]:
                 item_ids = {item["id"] for item in widget["items"]}
                 if widget["selected"] not in item_ids:
                     errors.append(f"unknown list selection in {path}: {widget['selected']}")
-            if widget.get("type") in {"text-input", "checkbox", "button", "list"} and widget.get("action"):
-                action_ids.add(widget["action"])
     return errors
 
 
@@ -96,7 +93,11 @@ def main() -> int:
 
     for path in sorted(INVALID_DIR.glob("*.json")):
         document = load(path)
-        if not list(validator.iter_errors(document)):
+        schema_errors = list(validator.iter_errors(document))
+        if schema_errors:
+            continue
+        semantic_errors = check_semantics(document, path)
+        if not semantic_errors:
             failures.append(f"invalid fixture unexpectedly validates: {path}")
 
     if failures:
